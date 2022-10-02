@@ -11,9 +11,9 @@ logging:
           security:
             saml: DEBUG
 
-service.provider.entity.id: # put your entity id here e.g com:uday:spring:boot:sp
+service.provider.entity.id: com:phuta:spring:boot:sp
 
-idp.metedata.url: # put your IDP metadata URL here
+idp.metedata.url: /Users/phuta.local/Downloads/saml2-metadata-idp.xml
 
 # you can update credentials if you want, I recommend you to keep as it is for demo purpose
 saml:

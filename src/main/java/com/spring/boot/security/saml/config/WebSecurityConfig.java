@@ -7,6 +7,9 @@ import org.apache.velocity.app.VelocityEngine;
 import org.opensaml.saml2.metadata.provider.HTTPMetadataProvider;
 import org.opensaml.saml2.metadata.provider.MetadataProvider;
 import org.opensaml.saml2.metadata.provider.MetadataProviderException;
+import org.opensaml.saml2.metadata.provider.ResourceBackedMetadataProvider;
+import org.opensaml.util.resource.FilesystemResource;
+import org.opensaml.util.resource.ResourceException;
 import org.opensaml.xml.parse.ParserPool;
 import org.opensaml.xml.parse.StaticBasicParserPool;
 import org.springframework.beans.factory.DisposableBean;
@@ -223,13 +226,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
     @Bean
     @Qualifier("idp-azure")
     public ExtendedMetadataDelegate azureExtendedMetadataProvider()
-            throws MetadataProviderException {
+        throws MetadataProviderException, ResourceException {
         String idpAzureMetadataURL = ipdMetaDataUrl;
-        HTTPMetadataProvider httpMetadataProvider = new HTTPMetadataProvider(
-                this.backgroundTaskTimer, httpClient(), idpAzureMetadataURL);
-        httpMetadataProvider.setParserPool(parserPool());
+        ResourceBackedMetadataProvider resourceBackedMetadataProvider =
+            new ResourceBackedMetadataProvider(this.backgroundTaskTimer, new FilesystemResource(ipdMetaDataUrl));
+//        HTTPMetadataProvider httpMetadataProvider = new HTTPMetadataProvider(
+ //               this.backgroundTaskTimer, httpClient(), idpAzureMetadataURL);
+        resourceBackedMetadataProvider.setParserPool(parserPool());
         ExtendedMetadataDelegate extendedMetadataDelegate =
-                new ExtendedMetadataDelegate(httpMetadataProvider, extendedMetadata());
+                new ExtendedMetadataDelegate(resourceBackedMetadataProvider, extendedMetadata());
         extendedMetadataDelegate.setMetadataTrustCheck(true);
         extendedMetadataDelegate.setMetadataRequireSignature(false);
         backgroundTaskTimer.purge();
@@ -241,7 +246,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
     // Do no forget to call iniitalize method on providers
     @Bean
     @Qualifier("metadata")
-    public CachingMetadataManager metadata() throws MetadataProviderException {
+    public CachingMetadataManager metadata() throws MetadataProviderException, ResourceException {
         List<MetadataProvider> providers = new ArrayList<>();
         providers.add(azureExtendedMetadataProvider());
         return new CachingMetadataManager(providers);
