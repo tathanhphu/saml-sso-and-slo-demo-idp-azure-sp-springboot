@@ -11,9 +11,9 @@ logging:
           security:
             saml: DEBUG
 
-service.provider.entity.id: com:phuta:spring:boot:sp
+service.provider.entity.id: com:spring:boot:sp:${server.port}
 
-idp.metedata.url: /Users/phuta.local/Downloads/saml2-metadata-idp.xml
+idp.metadata.url: /Users/phuta/Downloads/saml2-metadata-idp-${server.port}.xml
 
 # you can update credentials if you want, I recommend you to keep as it is for demo purpose
 saml:
@@ -21,3 +21,18 @@ saml:
   private.key:
     alias: apollo
     password: nalle123
+
+server:
+  port: 8443
+  servlet:
+    session:
+      cookie:
+        name: COOKIE${server.port}
+#  ssl:
+##    enabled: true
+#    key-store-type: PEMCFG
+#    key-alias: 'tomcat'
+#    key-store-password: '@Dmin321'
+#    key-store: 'classpath:/saml/phuta.ddns.net.jks'
+##    key-password: '@Dmin321'
+

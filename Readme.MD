@@ -125,3 +125,6 @@ You have already added users in the IDP's application so you can use
 those users to log in to this service.
 
 And we are done here, **Thank You.**
+```
+java -jar -Dservice.provider.entity.id=com:daotran:spring:boot:sp -Dserver.port=8444 -Didp.metadata.url=/Users/phuta/Downloads/saml2-metadata-idp-8444.xml -Dserver.servlet.session.cookie.name=PHUTA spring-boot-security-saml-sample-2.3.1.RELEASE.jar
+```

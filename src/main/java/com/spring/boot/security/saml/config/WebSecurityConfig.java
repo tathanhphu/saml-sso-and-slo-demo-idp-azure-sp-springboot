@@ -74,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
     @Value("${service.provider.entity.id}")
     private String serviceProviderEntityId;
 
-    @Value("${idp.metedata.url}")
+    @Value("${idp.metadata.url}")
     private String ipdMetaDataUrl;
 
     @Value("${saml.keystore.password}")
@@ -227,6 +227,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
     @Qualifier("idp-azure")
     public ExtendedMetadataDelegate azureExtendedMetadataProvider()
         throws MetadataProviderException, ResourceException {
+        System.out.println("===[phuta] Entity ID: " + serviceProviderEntityId);
+        System.out.println("===[phuta] IDP Metadata URL: " + ipdMetaDataUrl);
         String idpAzureMetadataURL = ipdMetaDataUrl;
         ResourceBackedMetadataProvider resourceBackedMetadataProvider =
             new ResourceBackedMetadataProvider(this.backgroundTaskTimer, new FilesystemResource(ipdMetaDataUrl));
@@ -260,6 +262,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
         metadataGenerator.setExtendedMetadata(extendedMetadata());
         metadataGenerator.setIncludeDiscoveryExtension(false);
         metadataGenerator.setKeyManager(keyManager());
+        metadataGenerator.setBindingsSLO(Arrays.asList("POST", "Redirect"));
         return metadataGenerator;
     }
 
