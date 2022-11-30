@@ -28,11 +28,3 @@ server:
     session:
       cookie:
         name: COOKIE${server.port}
-#  ssl:
-##    enabled: true
-#    key-store-type: PEMCFG
-#    key-alias: 'tomcat'
-#    key-store-password: '@Dmin321'
-#    key-store: 'classpath:/saml/phuta.ddns.net.jks'
-##    key-password: '@Dmin321'
-
