@@ -38,6 +38,8 @@ will be the **Pingone**.
      ![](src/main/resources/static/screenshots/upload_sp_metadata.png)
   5. Continue to finish app setup
 
+## For QAs
+* For your convenience, the executable jar file has been uploaded in [binaries](binaries/spring-boot-security-saml-sample-2.3.1.RELEASE.jar) folder
 ## For developers 
 ##### Spring Boot Service Provider (SP) Configuration
 * Now open the project in the IDE and go to the 
