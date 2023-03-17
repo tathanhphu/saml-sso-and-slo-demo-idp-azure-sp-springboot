@@ -10,7 +10,7 @@ will be the **Pingone**.
 
 ### Dependencies And Tools Used To Build Applications
 * Git
-* JDK 8 or later
+* JDK 11 (tested) or later
 * Maven
 * Spring Web
 * Spring Security
