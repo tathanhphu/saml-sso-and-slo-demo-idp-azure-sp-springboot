@@ -33,7 +33,7 @@ will be the **Pingone**.
      ```
       java -Dserver.port=<portNumber> -Dservice.provider.entity.id=<uniqueID> -Didp.metadata.url=<full/path/to/pingone/saml/metadata/file> -jar spring-boot-security-saml-sample-2.3.1.RELEASE.jar
      ```
-  3. Download SP's metadata by access the link http://localhost:8443/saml/metadata
+  3. Download SP's metadata by access the link http://localhost:<portNumber>/saml/metadata
   4. Add the downloaded SP's metadata to Pingone by
      ![](src/main/resources/static/screenshots/upload_sp_metadata.png)
   5. Continue to finish app setup
